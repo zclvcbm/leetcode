@@ -11,7 +11,7 @@ Your algorithm should have a linear runtime complexity.
 Could you implement it without using extra memory?
 
  */
-public class SingleNumber {
+public class SingleNumber_136 {
     public int singleNumber(int[] A){
         if(A==null || A.length==0)
             return 0;
@@ -25,7 +25,7 @@ public class SingleNumber {
     public static void main(String[] args){
         int[] array = {1,2,3,4,3,2,1};
 //        int result = new SingleNumber().singleNumber(array);
-        int result = new SingleNumber().singleNumber(null);
+        int result = new SingleNumber_136().singleNumber(null);
         System.out.println(result);
     }
 }

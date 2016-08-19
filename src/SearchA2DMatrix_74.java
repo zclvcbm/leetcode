@@ -1,3 +1,4 @@
+
 /**
  * Created by Admin on 2016/8/15.
  */
@@ -26,6 +27,5 @@ public class SearchA2DMatrix_74 {
         int i=0;
         i = i++;
         System.out.println(i);
-
     }
 }
