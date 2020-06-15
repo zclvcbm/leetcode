@@ -1,4 +1,4 @@
-import java.util.Map;
+
 
 /**
  * Created by Admin on 2016/7/26.
@@ -68,10 +68,12 @@ public class AddTwoNumbers {
     }
 
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        if(l1==null)
+        if(l1==null) {
             return l2;
-        else if(l2==null)
+        }
+        else if(l2==null) {
             return l1;
+        }
         ListNode head1 = l1;
         ListNode head2 = l2;
         int len1 = 0;
@@ -119,6 +121,50 @@ public class AddTwoNumbers {
         }
     }
 
+    public static ListNode addTwoNumbers2(ListNode l1, ListNode l2) {
+        //链表1只有一个节点且数值为0
+        if (l1.val == 0 && l1.next == null ) {
+            return l2;
+        }
+        //链表2只有一个节点且数值为0
+        if (l2.val == 0 && l2.next == null) {
+            return l1;
+        }
+
+        //节点游标
+        ListNode currNode1 = l1;
+        ListNode currNode2 = l2;
+        ListNode preNode1 = null;
+        int jinwei = 0;
+        while(currNode1 != null && currNode2 != null) {
+            preNode1 = currNode1;
+            int sum = currNode1.val +currNode2.val + jinwei;
+            jinwei = sum / 10;
+            currNode1.val = sum % 10;
+            currNode1 = currNode1.next;
+            currNode2 = currNode2.next;
+        }
+
+        //如果链表1为空，则将链表2后面数据连接到链表1上
+        if (currNode1 == null) {
+            preNode1.next = currNode2;
+            currNode1 = preNode1.next;
+        }
+        //依次更新链表上节点的数值
+        while (currNode1 != null) {
+            int sum = currNode1.val + jinwei;
+            jinwei = sum / 10;
+            currNode1.val = sum % 10;
+            preNode1 = currNode1;
+            currNode1 = currNode1.next;
+        }
+        //如果最后一个节点数值+进位数>10（有新的进位），则在链表后面添加一个节点
+        if (jinwei > 0) {
+            preNode1.next = new ListNode(jinwei);
+        }
+        return l1;
+    }
+
     public static void main(String[] args){
 /*        ListNode head = new ListNode(2);
         ListNode node1 = new ListNode(4);
@@ -137,6 +183,11 @@ public class AddTwoNumbers {
 
         ListNode head = new ListNode(5);
         ListNode head2 = new ListNode(5);
-        ListNode root = addTwoNumbers1(head,head2);
+//        ListNode root = addTwoNumbers1(head,head2);
+        ListNode root = addTwoNumbers2(head,head2);
+        while (root != null) {
+            System.out.println(root.val);
+            root = root.next;
+        }
     }
 }
